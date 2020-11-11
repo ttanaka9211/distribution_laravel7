@@ -23,3 +23,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
 Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
+Route::get('/deactive', 'Auth\DeactiveController@showDeactiveForm')->name('deactive.form');
+Route::post('/deactive', 'Auth\DeactiveController@deactive')->name('deactive');

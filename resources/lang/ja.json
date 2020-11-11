@@ -35,5 +35,8 @@
     "Change Name": "氏名変更",
     "Your name has been changed.": "氏名が変更されました。",
     "Change Email": "メールアドレス変更",
-    "Your email address has been changed.": "メールアドレスが変更されました。"
+    "Your email address has been changed.": "メールアドレスが変更されました。",
+    "Verify Email Address": "メールアドレス認証",
+    "Please click the button below to verify your email address.": "下のボタンをクリックして認証してください。",
+    "If you did not create an account, no further action is required.": "このメールにお心当たりがない方は、恐れ入りますが、このメールを削除してください。"
 }

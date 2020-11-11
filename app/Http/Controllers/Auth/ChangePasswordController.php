@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 
 class ChangePasswordController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $this->middleware('auth');
-    }
+    } */
 
     public function showChangePasswordForm()
     {
-        return view('auth\passwords\change');
+        return view('auth/passwords/change');
     }
 
     public function changePassword()

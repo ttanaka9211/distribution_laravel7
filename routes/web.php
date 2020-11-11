@@ -28,5 +28,5 @@ Route::post('/setting/deactive', 'Auth\DeactiveController@deactive')->name('deac
 Route::get('/setting', 'SettingController@index')->name('setting');
 Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.form');
 Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
-Route::get('/setting/email', 'SettingController@showCangeEmailForm')->name('email.from');
+Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
 Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');

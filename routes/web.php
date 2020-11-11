@@ -21,7 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
-Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
-Route::get('/deactive', 'Auth\DeactiveController@showDeactiveForm')->name('deactive.form');
-Route::post('/deactive', 'Auth\DeactiveController@deactive')->name('deactive');
+Route::get('/setting/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
+Route::post('/setting/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
+Route::get('/setting/deactive', 'Auth\DeactiveController@showDeactiveForm')->name('deactive.form');
+Route::post('/setting/deactive', 'Auth\DeactiveController@deactive')->name('deactive');
+Route::get('/setting', 'SettingController@index')->name('setting');
+Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.form');
+Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
+Route::get('/setting/email', 'SettingController@showCangeEmailForm')->name('email.from');
+Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');

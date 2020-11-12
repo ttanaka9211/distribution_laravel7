@@ -27,19 +27,14 @@
 
                     <div class="list-group mb-3" style="max-width:400px; margin:auto;">
                         <a href="{{ route('name.form') }}"
-                            @if ($auth->email_verified_at)
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                            @else
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center disabled" tabindex="-1" aria-disabled="true"
-                            @endif
                             >
                             <dl class="mb-0">
                                 <dt>{{ __('Name') }}</dt>
                                 <dd class="mb-0">{{ $auth->name }}</dd>
                             </dl>
-                            @if ($auth->email_verified_at)
                             <div><i class="fas fa-chevron-right"></i></div>
-                            @endif
                         </a>
 
                         <a href="{{ route('email.form') }}"

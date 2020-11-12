@@ -38,5 +38,6 @@
     "Your email address has been changed.": "メールアドレスが変更されました。",
     "Verify Email Address": "メールアドレス認証",
     "Please click the button below to verify your email address.": "下のボタンをクリックして認証してください。",
-    "If you did not create an account, no further action is required.": "このメールにお心当たりがない方は、恐れ入りますが、このメールを削除してください。"
+    "If you did not create an account, no further action is required.": "このメールにお心当たりがない方は、恐れ入りますが、このメールを削除してください。",
+    "A confirmation email for changing the email address has been sent.": "メールアドレス変更の確認メールを送信しました。"
 }

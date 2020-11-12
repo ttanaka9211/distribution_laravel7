@@ -11,7 +11,7 @@ class SettingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('verified')->except('index');
+        $this->middleware('verified')->except(['index', 'showChangeEmailForm', 'changeEmail']);
     }
 
     public function index()
@@ -46,10 +46,20 @@ class SettingController extends Controller
 
     public function changeEmail(ChangeEmailRequest $request)
     {
-        $user = Auth::user();
-        $user->email = $request->get('email');
-        $user->save();
+        //ValidationはChangeUsernameRequestで処理
 
-        return redirect()->route('setting')->with('status', __('Your email address has been changed.'));
+        //メールアドレス変更処理
+        $user = Auth::user();
+
+        if ($user->email == $request->get('email')) {
+            return redirect()->route('setting')->with('status', __('Your email address has been changed.'));
+        }
+
+        $user->email = $request->get('email');
+        $user->email_verified_at = null;
+        $user->save();
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('setting')->with('status', __('A confirmation email for changing the email address has been sent.'));
     }
 }

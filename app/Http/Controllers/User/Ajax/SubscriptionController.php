@@ -16,7 +16,9 @@ class SubscriptionController extends Controller
         if (!$user->subscribed('main')) {
             $payment_method = $request->payment_method;
             $plan = $request->plan;
-            $user->newSubscription('main', $plan)->create($payment_method);
+            $user->newSubscription('main', $plan)
+            ->trialDays(20) //20日間のトライアル
+            ->create($payment_method);
             $user->load('subscriptions');
         }
 

@@ -21,7 +21,7 @@
 <body>
     <div id="nav">
         <script src="{{ asset('js/app.js') }}"></script>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -74,7 +74,6 @@
             </div>
         </nav>
     <div id="app" class="container">
-        <h1 class="mb-4">Stripeを使った月額課金・サンプル</h1>
         <div class="row">
             <div class="offset-3 col-6">
                 <div class="card mb-4">
@@ -133,14 +132,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
                         <h5>テスト入力について</h5>
                         <hr>
                         <strong>名義人：</strong> 半角ローマ字ならなんでもOK<br>
                         <strong>カード番号：</strong> <a href="https://stripe.com/docs/testing#cards" target="_blank">テスト用のカード番号</a>に用意されています。なお、年／月は未来の日付ならいつでもOKで、CVCも数字ならなんでもOKです。
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
 Auth::routes(['verify' => true]);
 
@@ -30,3 +30,8 @@ Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.
 Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
 Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
 Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');
+
+//posts
+Route::get('/', 'PostsController@index')->name('top');
+Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
+Route::resource('comments', 'CommentsController', ['only' => ['store']]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -27,12 +28,28 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $params = $request->validate([
-            'title' => 'require|max:50',
+        $this->validate($request, [
+            'title' => 'required|max:50',
             'body' => 'required|max:2000',
+            //'file' => 'required|mimes:mp4,qt,x-ms-wmv,mpeg,x-msvideo',
+        ], [
+            'title.required' => 'タイトルを入力してください',
+            'title.max' => '５０文字以内で入力して下さい',
+            'body.required' => '本文を入力してください',
+            'body.max' => '2000文字以内で入力して下さい',
+            //'file.required' => 'ファイルが選択されていません',
+            //'file.mimes' => '動画ファイルではありません',
         ]);
-
-        Post::create($params);
+        if ($request->hasFile('datafile')) {
+            $disk = Storage::disk('s3');
+            $faileName = $disk->put('', $request->file('datafile'));
+            dump($faileName);
+            $post = new Post();
+            $post->path = $disk->url($faileName);
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->save();
+        }
 
         return redirect()->route('top');
     }

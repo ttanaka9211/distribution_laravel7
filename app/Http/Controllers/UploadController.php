@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,20 +25,39 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        // ファイルの存在チェック
+        /*  $this->validate($request, [
+             'title' => 'required|max:50',
+             'body' => 'required|max:2000',
+             'file' => 'required|mimes:mp4,qt,x-ms-wmv,mpeg,x-msvideo',
+         ], [
+             'title.required' => 'タイトルを入力してください',
+             'title.max' => '５０文字以内で入力して下さい',
+             'body.required' => '本文を入力してください',
+             'body.max' => '2000文字以内で入力して下さい',
+             'file.required' => 'ファイルが選択されていません',
+             'file.mimes' => '動画ファイルではありません',
+         ]); */
+
         if ($request->hasFile('datafile')) {
             $disk = Storage::disk('s3');
-
-            // S3にファイルを保存し、保存したファイル名を取得する
-            $fileName = $disk->put('', $request->file('datafile'));
-
-            // $fileNameには
-            // https://saitobucket3.s3.amazonaws.com/uhgKiZeJXMFhL9Vr7yT7XvlJqonPNx30xbJYoEo0.jpeg
-            // のような画像へのフルパスが格納されている
-            // このフルパスをDBに格納しておくと、画像を表示させるのは簡単になる
-            dd($disk->url($fileName));
+            $faileName = $disk->put('', $request->file('datafile'));
+            dump($faileName);
+            $post = new Post();
+            $post->path = $disk->url($faileName);
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->save();
         }
 
-        redirect('/');
+        return ['success' => '登録しました。'];
+
+        /* $params = $request->validate([
+            'title' => 'require|max:50',
+            'body' => 'required|max:2000',
+        ]);
+
+        Post::create($params);
+
+        return redirect()->route('top'); */
     }
 }

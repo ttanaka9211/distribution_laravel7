@@ -31,7 +31,7 @@ Route::post('/setting/name', 'SettingController@changeName')->name('name.change'
 Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
 Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');
 //post
-//Route::get('/', 'PostsController@index')->name('top');
+Route::get('/', 'PostsController@index')->name('top');
 Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
 Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 //stripe subscription
@@ -46,5 +46,5 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::post('ajax/subscription/update_card', 'User\Ajax\SubscriptionController@update_card');
 });
 
-Route::get('/', 'UploadController@create');
+Route::get('/upload', 'UploadController@create');
 Route::resource('/upload', 'UploadController', ['only' => ['create', 'store']]);

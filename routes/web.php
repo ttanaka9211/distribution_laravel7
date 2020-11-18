@@ -45,6 +45,3 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::post('ajax/subscription/change_plan', 'User\Ajax\SubscriptionController@change_plan');
     Route::post('ajax/subscription/update_card', 'User\Ajax\SubscriptionController@update_card');
 });
-
-Route::get('/upload', 'UploadController@create');
-Route::resource('/upload', 'UploadController', ['only' => ['create', 'store']]);

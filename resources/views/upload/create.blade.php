@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <form action="/posts" method="post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         @csrf
         <p>
             <input type="file" name="datafile">

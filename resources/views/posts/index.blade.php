@@ -28,7 +28,7 @@
             </div>
             <div class="card-footer">
                 <span class="mr-2">
-                    投稿日時 {{ $post->created_at->format('Y.m.d') }}
+                    投稿日時 {{ $post->created_at->format('y/m/d H:i') }}
                 </span>
 
                 @if ($post->comments->count())

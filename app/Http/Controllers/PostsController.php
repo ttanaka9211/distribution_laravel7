@@ -43,7 +43,7 @@ class PostsController extends Controller
         if ($request->hasFile('datafile')) {
             $disk = Storage::disk('s3');
             $faileName = $disk->put('', $request->file('datafile'));
-            dump($faileName);
+
             $post = new Post();
             $post->path = $disk->url($faileName);
             $post->title = $request->title;

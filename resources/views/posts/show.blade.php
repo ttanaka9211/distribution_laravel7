@@ -23,6 +23,17 @@
         <p class="mb-5">
                 {!! nl2br(e($post->body)) !!}
             </p>
+
+        <div class="mt-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <video class="embed-responsive-item" src="{{$post->path}}" allowfullscreen controls></video>
+            </div>
+            {{-- <video  controls>
+
+                                <source src="{{$post->path}}">
+
+            </video>
+        </div> --}}
         <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
             @csrf
 
@@ -33,14 +44,13 @@
                     本文
                 </label>
 
-                <textarea id="body" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="4">{{ old('body') }}</textarea>
+                <textarea id="body" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="2">{{ old('body') }}</textarea>
                 @if ($errors->has('body'))
                 <div class="invalid-feedback">
                     {{ $errors->first('body') }}
                 </div>
                 @endif
             </div>
-
 
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">

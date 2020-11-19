@@ -18,12 +18,13 @@
                         <p class="card-text">
                         {!! nl2br(e(Str::limit($post->body, 200))) !!}
                     </p>
-                        <div class="mt-4">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <video class="embed-responsive-item" src="{{$post->path}}" allowfullscreen></video>
+                        <div class="row">
+                            <div class="col">
+                                <img src="{{$post->image}}" alt="" class="img-thumbnail">
                             </div>
-                            {{-- <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
-                            続きを読む
+                        </div>
+                        {{-- <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
+                        続きを読む
                 </a> --}}
             </div>
             <div class="card-footer">

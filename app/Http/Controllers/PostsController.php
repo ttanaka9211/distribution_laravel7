@@ -40,12 +40,16 @@ class PostsController extends Controller
             //'file.required' => 'ファイルが選択されていません',
             //'file.mimes' => '動画ファイルではありません',
         ]);
-        if ($request->hasFile('datafile')) {
+        if ($request->hasFile('datafile', 'imagefile')) {
             $disk = Storage::disk('s3');
             $faileName = $disk->put('', $request->file('datafile'));
 
+            $image_disk = Storage::disk('s3');
+            $imageFail = $image_disk->put('', $request->file('imagefile'));
+
             $post = new Post();
             $post->path = $disk->url($faileName);
+            $post->image = $image_disk->url($imageFail);
             $post->title = $request->title;
             $post->body = $request->body;
             $post->save();

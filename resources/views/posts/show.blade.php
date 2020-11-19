@@ -28,12 +28,7 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <video class="embed-responsive-item" src="{{$post->path}}" allowfullscreen controls></video>
             </div>
-            {{-- <video  controls>
 
-                                <source src="{{$post->path}}">
-
-            </video>
-        </div> --}}
         <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
             @csrf
 

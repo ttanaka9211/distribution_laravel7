@@ -14,7 +14,8 @@ class AddPathToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->string('path')->nullable()->after('body');
+            $table->string('image')->nullable()->after('path');
         });
     }
 
@@ -26,7 +27,8 @@ class AddPathToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropColumn('image');
+            $table->dropColumn('path');
         });
     }
 }

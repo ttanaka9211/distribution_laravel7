@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/test', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/setting/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
 Route::post('/setting/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
 Route::get('/setting/deactive', 'Auth\DeactiveController@showDeactiveForm')->name('deactive.form');

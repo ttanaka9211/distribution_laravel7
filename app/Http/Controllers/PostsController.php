@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
+use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,6 +20,16 @@ class PostsController extends Controller
 
     public function index()
     {
+        if (Gate::allows('admin-higher')) {
+            $users = User::all();
+        } else {
+            //subscription確認
+            $user = Auth::user();
+            if (!($user->hasDefaultPaymentMethod())) {
+                return redirect('user/subscription');
+            }
+        }
+
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
 
         return view('posts.index', ['posts' => $posts]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\Post;
 use App\User;
 use Gate;
@@ -113,5 +114,41 @@ class PostsController extends Controller
         });
 
         return redirect()->route('top');
+    }
+
+    /**
+     * 引数のIDに紐づく投稿にいいね！！をする.
+     *
+     * @param  $id 投稿ID
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function like($id)
+    {
+        Like::create([
+            'post_id' => $id,
+            'user_id' => Auth::id(),
+        ]);
+
+        session()->flash('success', 'いいね！！をしました。');
+
+        return redirect()->back();
+    }
+
+    /**
+     * 引数のIDに紐づく投稿にいいね！！を取り消す.
+     *
+     * @param $id 投稿ID
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unlike($id)
+    {
+        $like = Like::where('post_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+
+        session()->flash('success', 'いいね！！を取り消しました。');
+
+        return redirect()->back();
     }
 }

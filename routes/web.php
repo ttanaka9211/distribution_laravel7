@@ -30,11 +30,17 @@ Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.
 Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
 Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
 Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');
-//post
+
+//投稿
 Route::get('/', 'PostsController@index')->name('top');
+//投稿（イイね）
+Route::get('/posts/like/{id}', 'PostsController@like')->name('post.like');
+Route::get('/posts/unlike/{id}', 'PostsController@unlike')->name('post.unlike');
+
 Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
 Route::resource('comments', 'CommentsController', ['only' => ['store']]);
-//stripe subscription
+
+//subscription登録
 Route::prefix('user')->middleware(['auth'])->group(function () {
     // 課金
     Route::get('subscription', 'User\SubscriptionController@index');

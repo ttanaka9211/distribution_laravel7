@@ -7,7 +7,7 @@
                 投稿の新規作成
             </h1>
 
-        <form method="POST" action="{{ route('posts.store') }}">
+        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
 
             <fieldset class="mb-4">
@@ -35,7 +35,14 @@
                     </div>
                     @endif
                 </div>
-
+                <div class="form-group">
+                    <label for="imagefile">サムネイル：</label>
+                    <input type="file" name="imagefile">
+                </div>
+                <div class="form-group">
+                    <label for="datafile">動画ファイル：</label>
+                    <input type="file" name="datafile">
+                </div>
                 <div class="mt-5">
                     <a class="btn btn-secondary" href="{{ route('top') }}">
                         キャンセル

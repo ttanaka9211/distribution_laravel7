@@ -28,7 +28,7 @@ class ChangePasswordController extends Controller
         $user->password = bcrypt($request->get('password'));
         $user->save();
 
-        //パスワード変更処理後、homeにリダイレクト
-        return redirect()->route('home')->with('status', __('Your password has been changed.'));
+        //パスワード変更処理後、settingにリダイレクト
+        return redirect()->route('setting')->with('status', __('Your password has been changed.'));
     }
 }

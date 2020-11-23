@@ -29,48 +29,55 @@
                 <video class="embed-responsive-item" src="{{$post->path}}" allowfullscreen controls></video>
             </div>
 
-        <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
-            @csrf
+            <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
+                @csrf
 
-            <input name="post_id" type="hidden" value="{{ $post->id }}">
+                <input name="post_id" type="hidden" value="{{ $post->id }}">
 
-            <div class="form-group">
-                <label for="body">
-                    本文
-                </label>
+                <div class="form-group">
+                    <label for="body">
+                        本文
+                    </label>
 
-                <textarea id="body" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="2">{{ old('body') }}</textarea>
-                @if ($errors->has('body'))
-                <div class="invalid-feedback">
-                    {{ $errors->first('body') }}
+                    <textarea id="body" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="2">{{ old('body') }}</textarea>
+                    @if ($errors->has('body'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('body') }}
+                    </div>
+                    @endif
                 </div>
-                @endif
-            </div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary">
-                    コメントする
-                </button>
-            </div>
-        </form>
-        <section>
-            <h2 class="h5 mb-4">
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        コメントする
+                    </button>
+                </div>
+            </form>
+            <section>
+                <h2 class="h5 mb-4">
                     コメント
                 </h2>
 
-            @forelse($post->comments as $comment)
-            <div class="border-top p-4">
-                <time class="text-secondary">
-                    {{ $comment->created_at->format('Y.m.d H:i') }}
-                </time>
-                <p class="mt-2">
+                @forelse($post->comments as $comment)
+                <div class="border-top p-4">
+                    <time class="text-secondary">
+                        {{ $comment->created_at->format('Y.m.d H:i') }}
+                    </time>
+                    <p class="mt-2">
                             {!! nl2br(e($comment->body)) !!}
                         </p>
-            </div>
-            @empty
-            <p>コメントはまだありません。</p>
-            @endforelse
-        </section>
+                </div>
+                @empty
+                <p>コメントはまだありません。</p>
+                @endforelse
+                <div>
+                    @if($post->is_liked_by_auth_user())
+                    <a href="{{ route('post.unlike', ['id' => $post->id]) }}" class="btn btn-success btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                    @else
+                    <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                    @endif
+                </div>
+            </section>
+        </div>
     </div>
-</div>
-@endsection
+    @endsection

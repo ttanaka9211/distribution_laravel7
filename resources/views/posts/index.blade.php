@@ -13,7 +13,7 @@
 </div>
 <div class="container col-lg-10">
     <div class="card-deck">
-        <div class="row flex-row flex-nowrap ">
+        <div class="row flex-row flex-nowrap overflow-auto">
 
 
             @foreach ($posts as $post)

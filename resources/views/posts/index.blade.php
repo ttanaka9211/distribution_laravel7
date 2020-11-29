@@ -1,6 +1,7 @@
 @extends('layouts.posts')
 
 @section('content')
+<h1>新着動画</h1>
 <div class="container">
     <div class="row">
         <div>
